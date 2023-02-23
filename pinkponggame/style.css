@@ -5,8 +5,27 @@ body{
     position: fixed;
     width: 200px;
     height: 20px;
-    background-color: rebeccapurple;
     border-radius: 10px;
     /* left: 100px; */
     transition: all 0.1s linear;
+}
+
+#player1{
+    background-color: rebeccapurple;
+}
+
+#player2{
+    background-color: red;
+    bottom: 10px;
+}
+
+#ball{
+    position: fixed;
+    width: 20px;
+    border-radius: 50%;
+    height: 20px;
+    background-color: rgb(122, 0, 0);
+    left: 50%;
+    top: 50%;
+    transition: background-color 1s linear;
 }
