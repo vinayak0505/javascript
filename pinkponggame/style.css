@@ -7,17 +7,16 @@ body{
     height: 100%;
     width: 100%;
     margin: 0;
-    /* position: relative; */
     display: flex;
 }
 
+/* rod or slate or plyaer */
 .slate{
     position: fixed;
     width: 200px;
     height: 20px;
     left: calc(50% - 100px);
     border-radius: 10px;
-    /* left: 100px; */
     transition: all 0.1s linear;
 }
 
@@ -30,6 +29,7 @@ body{
     bottom: 10px;
 }
 
+/* ball */
 #ball{
     position: fixed;
     width: 20px;
@@ -41,16 +41,19 @@ body{
     transition: background-color 0.5s linear;
 }
 
+/* score */
 .score{
     position: fixed;
     opacity: 0.6;
     font-size: 80px;
 }
 
+/* score for player 2*/
 #player2score{
     right: 8px;
 }
 
+/* main screen promt sytle */
 #prompt{
     align-self: center;
     text-align: center;

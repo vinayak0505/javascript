@@ -1,9 +1,15 @@
+// array of rod or slates
 let slates = document.getElementsByClassName("slate");
+// scores
 let scores = document.getElementsByClassName("score");
+// body
 let body = document.getElementById("body");
+// promt message
 let promt = document.getElementById("prompt");
+// ball
 let ball = document.getElementById("ball");
 
+// all initals values 
 let value;
 let play = false;
 let player1Score = 0, player2Score = 0;
@@ -12,6 +18,7 @@ let ballColorInterval;
 let ballSpeedInterval;
 
 init();
+// init function need to be calles in the begning
 function init() {
     let player = localStorage.getItem("player");
     if (player == undefined) {
@@ -23,6 +30,7 @@ function init() {
     promtInterval = setInterval(changePromt, 2000);
 }
 
+// call when to start game
 function startGame() {
     play = true;
     ballColorInterval = setInterval(changeBallColor, 500);
@@ -31,6 +39,8 @@ function startGame() {
     promt.style.opacity = 0;
 }
 
+
+// call to pause game
 function stopGame() {
     play = false;
     clearInterval(ballColorInterval);
@@ -38,12 +48,14 @@ function stopGame() {
     promtInterval = setInterval(changePromt, 2000);
 }
 
+// changeing promt opacity
 function changePromt() {
     if (promt.style.opacity == 0) {
         promt.style.opacity = 0.6;
     } else promt.style.opacity = 0;
 }
 
+// ball color
 let isRed = true;
 function changeBallColor() {
     if (isRed) ball.style.backgroundColor = "rgb(122, 0, 0)";
@@ -51,6 +63,8 @@ function changeBallColor() {
     isRed = !isRed;
 }
 
+
+// speed for ball movement
 let horizontal = 1;
 let vertical = 1;
 function changeBall() {
@@ -60,6 +74,7 @@ function changeBall() {
     checkVertical();
 }
 
+// checking ball horizontal does not goes out of screen
 function checkHorizontal() {
     if (ball.getBoundingClientRect().right >= screen.width && horizontal > 0) {
         horizontal = -horizontal;
@@ -70,12 +85,13 @@ function checkHorizontal() {
     }
 }
 
+// checking ball vertically does not goes out of screen and change directoin
 function checkVertical() {
     // player 2
     if (ball.getBoundingClientRect().bottom >= slates[1].getBoundingClientRect().top && vertical > 0) {
         if (colide(slates[1], ball)) {
             vertical = -vertical;
-            player2ScoreIncreate();
+            player2ScoreIndecator();
         } else {
             won(1)
         }
@@ -85,21 +101,25 @@ function checkVertical() {
     if (ball.getBoundingClientRect().top <= slates[0].getBoundingClientRect().bottom && vertical < 0) {
         if (colide(slates[0], ball)) {
             vertical = -vertical;
-            player1ScoreIncreate();
+            player1ScoreIndecator();
         } else {
             won(2)
         }
     }
 }
 
+/**
+ * @brief move the slate
+ * @param by defines the movement speed and direction
+ */
 function move(by) {
     for (var i = 0; i < slates.length; i++) {
         slates[i].style.left = (by + slates[i].getBoundingClientRect().left) + 'px';
     }
 }
 
+// movement speed
 const SPEED = 50;
-
 document.addEventListener('keydown',
     function (event) {
         if (play == false) {
@@ -119,6 +139,7 @@ document.addEventListener('keydown',
     }
 );
 
+// return true if collision between 2 objects occour
 function colide(object1, object2) {
     if (object1.getBoundingClientRect().right > object2.getBoundingClientRect().left
         && object1.getBoundingClientRect().left < object2.getBoundingClientRect().left)
@@ -130,11 +151,12 @@ function colide(object1, object2) {
     return false;
 }
 
+// resets the games
 function reset() {
     stopGame();
     console.log(body.getBoundingClientRect());
-    player2ScoreIncreate(0);
-    player1ScoreIncreate(0);
+    player2ScoreIndecator(0);
+    player1ScoreIndecator(0);
     ball.style.left = (body.getBoundingClientRect().right / 2) + "px";
     ball.style.top = ((slates[1].getBoundingClientRect().top - slates[0].getBoundingClientRect().top) / 2) + "px";
     let center = (body.getBoundingClientRect().width / 2) - (slates[0].getBoundingClientRect().width / 2);
@@ -142,7 +164,8 @@ function reset() {
     slates[1].style.left = center + 'px';
 }
 
-function player1ScoreIncreate(value) {
+// player 1 score indecator
+function player1ScoreIndecator(value) {
     if (value != undefined) {
         player1Score = value;
     } else {
@@ -151,7 +174,8 @@ function player1ScoreIncreate(value) {
     scores[0].innerHTML = player1Score;
 }
 
-function player2ScoreIncreate(value) {
+// player 2 score indecator
+function player2ScoreIndecator(value) {
     if (value != undefined) {
         player2Score = value;
     } else {
@@ -160,6 +184,10 @@ function player2ScoreIncreate(value) {
     scores[1].innerHTML = player2Score;
 }
 
+/**
+ * @info call when even a player won
+ * @param player that won
+ */
 function won(player) {
     if (player == 1) {
         if (value < player1Score || value == undefined) {
