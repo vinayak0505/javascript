@@ -5,6 +5,7 @@ body{
     position: fixed;
     width: 200px;
     height: 20px;
+    left: calc(50% - 100px);
     border-radius: 10px;
     /* left: 100px; */
     transition: all 0.1s linear;
@@ -28,4 +29,14 @@ body{
     left: 50%;
     top: 50%;
     transition: background-color 1s linear;
+}
+
+.score{
+    position: fixed;
+    opacity: 0.6;
+    font-size: 80px;
+}
+
+#player2score{
+    right: 8px;
 }
