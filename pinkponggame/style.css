@@ -1,0 +1,12 @@
+body{
+    position: relative;
+}
+.slate{
+    position: fixed;
+    width: 200px;
+    height: 20px;
+    background-color: rebeccapurple;
+    border-radius: 10px;
+    /* left: 100px; */
+    transition: all 0.1s linear;
+}
