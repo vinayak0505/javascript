@@ -1,6 +1,16 @@
-body{
-    position: relative;
+html{
+    height: 100%;
+    width: 100%;
 }
+
+body{
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    /* position: relative; */
+    display: flex;
+}
+
 .slate{
     position: fixed;
     width: 200px;
@@ -28,7 +38,7 @@ body{
     background-color: rgb(122, 0, 0);
     left: 50%;
     top: 50%;
-    transition: background-color 1s linear;
+    transition: background-color 0.5s linear;
 }
 
 .score{
@@ -39,4 +49,13 @@ body{
 
 #player2score{
     right: 8px;
+}
+
+#prompt{
+    align-self: center;
+    text-align: center;
+    opacity: 0.6;
+    font-size: 80px;
+    width: 100%;
+    transition: opacity 1s linear;
 }
