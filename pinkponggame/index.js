@@ -160,7 +160,7 @@ function reset() {
     ball.style.left = (body.getBoundingClientRect().right / 2) + "px";
     ball.style.top = ((slates[1].getBoundingClientRect().top - slates[0].getBoundingClientRect().top) / 2) + "px";
     let center = (body.getBoundingClientRect().width / 2) - (slates[0].getBoundingClientRect().width / 2);
-    slates[0].style.left = center + 'px';
+        slates[0].style.left = center + 'px';
     slates[1].style.left = center + 'px';
 }
 
