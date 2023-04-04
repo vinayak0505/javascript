@@ -1,0 +1,4 @@
+/* This will allow a link to be called */
+a input[type='checkbox'] {
+    pointer-events: none;
+}

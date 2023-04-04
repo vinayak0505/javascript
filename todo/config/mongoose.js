@@ -2,13 +2,16 @@
 const mongoose = require('mongoose');
 
 //connect to the database
-mongoose.connect('mongodb://localhost/contact_list_db');
+mongoose.connect('mongodb://localhost/todo_list_db');
 
 //acquire the connection(to check if it's successful)
 const db = mongoose.connection;
 
 //error
-db.on('error', function (err) { console.log(err); });
+db.on('error', function (err) {
+    console.log("error connecting to the databse");
+    console.log(err);
+});
 
 //up and running then print the message
 db.once('open', function () {

@@ -1,0 +1,69 @@
+<html>
+
+<head>
+    <title>
+        <%= locals.title%>
+    </title>
+    <link rel="stylesheet" href="/css/home.css">
+</head>
+
+<body>
+
+    <div>
+        <ul>
+            <% var options={ year: 'numeric' , month: 'long' , day: 'numeric' };%>
+            <% for (let i of todo_list) { %>
+            <div class="">
+                <li>
+                    <p>
+                        <%= i.heading %>
+                    </p>
+                    <p>
+                        <%= i.date.toLocaleDateString("en-US", options) %>
+                    </p>
+                    <p>
+                        <%= i.type %>
+                    </p>
+                </li>
+            </div>
+            <% if (i.selected == true) { %>
+            <div class="delete-button">
+                <a href="/unselect-todo/?id=<%= i.id %>">
+                    <input type="checkbox" checked class="checkbox">
+                </a>
+            </div>
+            <% } else { %>
+            <div class="delete-button">
+                <a href="/select-todo/?id=<%= i.id %>">
+                    <input type="checkbox" class="checkbox">
+                </a>
+            </div>
+            <% } %>
+            <% } %>
+        </ul>
+    </div>
+
+    <div class="delete-button">
+        <a href="/delete-selected-todo">
+            delete
+        </a>
+    </div>
+
+    <form action="/create-todo" method="POST">
+        <input type="text" name="heading" placeholder="Enter heading" required>
+        <input type="date" name="date" placeholder="Enter date" required>
+        <label for="type-names">Choose a dog name:</label>
+        <select name="type" id="type-names">
+            <option value="">--Please choose an option--</option>
+            <option value="personal">Personal</option>
+            <option value="work">Work</option>
+            <option value="school">School</option>
+            <option value="cleaning">Cleaning</option>
+            <option value="others">Others</option>
+        </select>
+        <button type="submit">Add Todo</button>
+    </form>
+    <script type="text/javascript" src="/js/home.js"></script>
+</body>
+
+</html>

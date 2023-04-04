@@ -1,6 +1,6 @@
 const express = require('express');
 const path = require('path');
-const port = 8000;
+const port = 8002;
 
 const db = require('./config/mongoose');
 const Contact = require('./models/contact');
@@ -78,7 +78,6 @@ app.listen(port, function(err){
 app.get('/delete-contact/', function(req, res){
     console.log(req.query);
     let id = req.query.id
-
     Contact.findOneAndDelete(id, function(err){
         if(err){
             console.log('error in deleting the object');
@@ -86,7 +85,5 @@ app.get('/delete-contact/', function(req, res){
         }
         return res.redirect('back');
     })
-
-
    
 });
