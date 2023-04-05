@@ -5,65 +5,106 @@
         <%= locals.title%>
     </title>
     <link rel="stylesheet" href="/css/home.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
 </head>
 
 <body>
-
-    <div>
-        <ul>
-            <% var options={ year: 'numeric' , month: 'long' , day: 'numeric' };%>
-            <% for (let i of todo_list) { %>
-            <div class="">
-                <li>
-                    <p>
-                        <%= i.heading %>
-                    </p>
-                    <p>
-                        <%= i.date.toLocaleDateString("en-US", options) %>
-                    </p>
-                    <p>
-                        <%= i.type %>
-                    </p>
-                </li>
+    <!-- app title or heading -->
+    <h1 id="title">todo app</h1>
+    <form action="/create-todo" method="POST">
+        <!-- heading input -->
+        <div class="heading">
+            <label for="heading">Description</label>
+            <input type="text" name="heading" placeholder="Enter heading" class="input_style" required>
+        </div>
+        <div class="flex">
+            <!-- type input -->
+            <div class="type-names">
+                <label for="type-names">Select Type</label>
+                <select name="type" id="type-names" class="input_style">
+                    <option value="">Choose a Category</option>
+                    <option value="personal">Personal</option>
+                    <option value="work">Work</option>
+                    <option value="school">School</option>
+                    <option value="cleaning">Cleaning</option>
+                    <option value="others">Others</option>
+                </select>
             </div>
-            <% if (i.selected == true) { %>
-            <div class="delete-button">
-                <a href="/unselect-todo/?id=<%= i.id %>">
-                    <input type="checkbox" checked class="checkbox">
-                </a>
+            <!-- date input -->
+            <div class="date">
+                <label for="date">Due Date</label>
+                <input type="date" name="date" placeholder="Enter date" class="input_style" required>
             </div>
-            <% } else { %>
-            <div class="delete-button">
-                <a href="/select-todo/?id=<%= i.id %>">
-                    <input type="checkbox" class="checkbox">
-                </a>
-            </div>
-            <% } %>
-            <% } %>
-        </ul>
-    </div>
-
-    <div class="delete-button">
-        <a href="/delete-selected-todo">
-            delete
+        </div>
+        <div class="buttons">
+            <!-- add button -->
+            <button type="submit" id="add-task" class="button">
+                <i class="fa-solid fa-plus"></i> Add Task
+            </button>
+            <!-- delete selected button -->
+            <button formaction="/delete-selected-todo" id="delete-task" class="button" formmethod="get" type="submit" formnovalidate>
+                <i class="fa-solid fa-trash"></i> Delete Task
+            </button>
+        </div>
+    </form>
+    <!-- sort button -->
+    <div class="flex">
+        <a href="/sort-todo" class="sort">
+            sort by <%= sort_by %> <i class="fas fa-sort"></i>
         </a>
     </div>
 
-    <form action="/create-todo" method="POST">
-        <input type="text" name="heading" placeholder="Enter heading" required>
-        <input type="date" name="date" placeholder="Enter date" required>
-        <label for="type-names">Choose a dog name:</label>
-        <select name="type" id="type-names">
-            <option value="">--Please choose an option--</option>
-            <option value="personal">Personal</option>
-            <option value="work">Work</option>
-            <option value="school">School</option>
-            <option value="cleaning">Cleaning</option>
-            <option value="others">Others</option>
-        </select>
-        <button type="submit">Add Todo</button>
-    </form>
+    <!-- todo list items -->
+    <div class="items">
+        <% var options={ year: 'numeric' , month: 'long' , day: 'numeric' };%>
+        <% for (let i of todo_list) { %>
+
+        <div class="line"></div>
+        <div class="inline">
+            <% if (i.selected == true) { %>
+            <a href="/unselect-todo/?id=<%= i.id %>">
+                <input type="checkbox" checked class="checkbox">
+            </a>
+            <% } else { %>
+            <a href="/select-todo/?id=<%= i.id %>">
+                <input type="checkbox" class="checkbox">
+            </a>
+            <% } %>
+            <div class="about">
+                <!-- for strikethrow  if selected -->
+                <% if(i.selected == true){%>
+                <s>
+                    <% } %>
+                    <% if(i.selected == true){%>
+                        <!-- heading light if selected -->
+                    <p id="item-heading" class="light">
+                        <% } else {%>
+                    <p id="item-heading">
+                        <% } %>
+                        <%= i.heading %>
+                    </p>
+                    <!-- date -->
+                    <p id="item-date">
+                        <i class="far fa-calendar"></i>
+                        <%= i.date.toLocaleDateString("en-US", options) %>
+                    </p>
+                    <% if(i.selected == true){%>
+                </s>
+                <% } %>
+            </div>
+            <!-- type -->
+            <p id="item-type" class="<%=i.type%>">
+                <%= i.type %>
+            </p>
+        </div>
+
+        <% } %>
+    </div>
+
     <script type="text/javascript" src="/js/home.js"></script>
+    <script src="https://kit.fontawesome.com/42f1b5f6ee.js" crossorigin="anonymous"></script>
 </body>
 
 </html>

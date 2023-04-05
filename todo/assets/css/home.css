@@ -1,4 +1,163 @@
 /* This will allow a link to be called */
 a input[type='checkbox'] {
     pointer-events: none;
+    margin: 10px;
+}
+
+/* title */
+#title {
+    text-transform: uppercase;
+    color: gray;
+    text-align: center;
+    margin-top: 20px;
+}
+
+p {
+    padding: 0;
+    margin: 0;
+}
+
+/* removing default padding and margin */
+body {
+    padding: 0;
+    margin: 0;
+}
+
+/* text style */
+.heading,
+.date,
+.type-names {
+    text-transform: uppercase;
+    box-sizing: border-box;
+    border: 1px solid gainsboro;
+    height: 80px;
+    width: 100%;
+    padding: 8px 40px;
+}
+
+label {
+    display: block;
+}
+
+.flex {
+    display: flex;
+    justify-content: space-around;
+}
+
+.input_style {
+    width: 100%;
+    border: none;
+    outline: none;
+}
+
+/* setting font */
+* {
+    font-family: 'Roboto', sans-serif;
+}
+
+input {
+    font-size: 15px;
+}
+
+.button {
+    color: white;
+    text-transform: uppercase;
+    margin: 10px;
+    font-size: 20px;
+    border: none;
+    padding: 10px;
+    background-color: #444444;
+
+}
+
+.buttons {
+    display: flex;
+    justify-content: center;
+}
+
+#add-task {
+    background-color: #444444;
+}
+
+#delete-task {
+    background-color: #EE351D;
+}
+
+.line {
+    width: 100%;
+    background-color: gainsboro;
+    height: 1px;
+    align-items: center;
+}
+
+.items {
+    padding: 0px 10px;
+}
+
+.inline {
+    display: flex;
+    padding: 20px 0px;
+}
+
+#item-heading {
+    font-size: large;
+    font-weight: bold;
+}
+
+#item-date {
+    text-transform: uppercase;
+    font-size: small;
+    color: rgba(120, 184, 88, 0.6);
+}
+
+#item-type {
+    text-transform: uppercase;
+    justify-self: end;
+    margin-right: 20px;
+    color: white;
+    font-size: large;
+    border-radius: 2px;
+    padding: 10px;
+}
+
+/* color scheem for different styles */
+.school {
+    background-color: yellow;
+}
+
+.work {
+    background-color: red;
+}
+
+.personal {
+    background-color: green;
+}
+
+.cleaning {
+    background-color: palevioletred;
+}
+
+.others {
+    background-color: grey;
+}
+
+.about {
+    width: 100%;
+}
+
+/* light color */
+.light {
+    color: gainsboro;
+}
+
+/* sort link style */
+.sort {
+    text-decoration: none;
+    align-self: self-end;
+    padding-right: 20px;
+}
+
+.flex {
+    justify-content: end;
+    display: flex;
 }

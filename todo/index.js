@@ -29,30 +29,20 @@ app.listen(port, function (err) {
     console.log('My Server is running on Port', port);
 })
 
-var todoList = [
-    {
-        heading: "salkdjf",
-        date: "1239393",
-        type: "school"
-    },
-    {
-        heading: "salkdjf",
-        date: "1239393",
-        type: "school"
-    }
-];
+
+var sort_by = "heading";
 
 app.get('/', async function (req, res) {
-
     /**
      * @find getting data from the database 
      * {} this helps in fetching complete data
      */
     try {
-        const todos = await Todo.find({});
+        const todos = await Todo.find({}).sort(sort_by);
         res.render('home', {
             title: "Todo",
-            todo_list: todos
+            todo_list: todos,
+            sort_by: sort_by
         })
     } catch (error) {
         console.log(error);
@@ -81,6 +71,7 @@ app.post('/create-todo', async function (req, res) {
     }
 })
 
+// check the todo items
 app.get('/select-todo/', async function (req, res) {
     console.log(req.query);
     let id = req.query.id
@@ -96,6 +87,7 @@ app.get('/select-todo/', async function (req, res) {
     }
 })
 
+// uncheck the todo items
 app.get('/unselect-todo/', async function (req, res) {
     console.log(req.query);
     let id = req.query.id
@@ -111,13 +103,37 @@ app.get('/unselect-todo/', async function (req, res) {
     }
 })
 
+/**
+ * @param delete_selected_todo will delete all elements that are selected 
+ */
 app.get('/delete-selected-todo', async function (req, res) {
     try {
         const deleted_items = await Todo.deleteMany({ selected: true });
-        alert(deleted_items.deletedCount + " items deleted");
         console.log(deleted_items);
     } catch (error) {
         console.log('not able to delete items');
+    }
+    return res.redirect('back');
+});
+
+
+/**
+ * changes the sorting of todo items
+ */
+app.get('/sort-todo', function (req, res) {
+    switch (sort_by) {
+        case "heading":
+            sort_by = "date"
+            break;
+        case "date":
+            sort_by = "type"
+            break;
+        case "type":
+            sort_by = "selected"
+            break;
+        default:
+            sort_by = "heading";
+            break;
     }
     return res.redirect('back');
 });
